@@ -5,7 +5,9 @@ FF_VERSION="3.4"
 if [[ $FFMPEG_VERSION != "" ]]; then
   FF_VERSION=$FFMPEG_VERSION
 fi
-SOURCE="ffmpeg-$FF_VERSION"
+#change by tb
+#SOURCE="ffmpeg-$FF_VERSION"
+SOURCE="../ffmpeg"
 FAT="FFmpeg-iOS"
 
 SCRATCH="scratch"
@@ -13,12 +15,17 @@ SCRATCH="scratch"
 THIN=`pwd`/"thin"
 
 # absolute path to x264 library
-#X264=`pwd`/fat-x264
+X264=`pwd`/fat-x264
+
 
 #FDK_AAC=`pwd`/../fdk-aac-build-script-for-iOS/fdk-aac-ios
 
+#change by tb
+#CONFIGURE_FLAGS="--enable-cross-compile --disable-debug --disable-programs \
+#                 --disable-doc --enable-pic"
 CONFIGURE_FLAGS="--enable-cross-compile --disable-debug --disable-programs \
-                 --disable-doc --enable-pic"
+                 --disable-doc --enable-pic --enable-gpl --enable-libx264 --enable-videotoolbox"
+#--enable-ffmpeg
 
 if [ "$X264" ]
 then
@@ -31,7 +38,7 @@ then
 fi
 
 # avresample
-#CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-avresample"
+CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-avresample"
 
 ARCHS="arm64 armv7 x86_64 i386"
 
